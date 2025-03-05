@@ -14,51 +14,51 @@
             background: linear-gradient(135deg, #1a1a1a, #4a4a4a);
             flex-direction: column;
             position: relative;
+            user-select: none; /* Запрещает выделение для всей страницы */
         }
         img {
-            width: 200px;
+            width: 300px;
             height: auto;
             border-radius: 10px;
+            cursor: pointer;
+            user-select: none; /* Запрещает выделение */
+            -webkit-user-drag: none; /* Запрещает перетаскивание в Safari */
+            -webkit-user-select: none; /* Запрещает выделение в Chrome/Safari */
+            -moz-user-select: none; /* Запрещает выделение в Firefox */
+            -ms-user-select: none; /* Запрещает выделение в Edge */
         }
         .footer-text {
             position: absolute;
-            bottom: 20px;
+            top: 10%;
             font-family: 'Raleway', sans-serif;
             font-size: 24px;
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
-        .mute-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 15px;
-            border: none;
-            background-color: #ff0000;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-            font-family: 'Raleway', sans-serif;
-            text-transform: uppercase;
-            transition: background 0.3s;
-        }
-        .mute-button:hover {
-            background-color: #cc0000;
-        }
     </style>
 </head>
 <body>
-    <img src="gfrre.png" alt="">
-    <button class="mute-button" id="muteButton">Выключить трек</button>
-    <audio id="audio" autoplay loop>
+    <div class="footer-text">TG:SOUNDQUELA</div>
+    <img src="fref.png" alt="" id="playImage">
+    <audio id="audio" loop>
         <source src="kiriecki.mp3" type="audio/mpeg">
     </audio>
-    <div class="footer-text">TG:SOUNDQUELA</div>
     <script>
         const audio = document.getElementById('audio');
-        const muteButton = document.getElementById('muteButton');
+        const playImage = document.getElementById('playImage');
+        let isPlaying = false;
 
-        muteButton.addEventListener('click', () => {
-            audio.pause();
+        playImage.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+            isPlaying = !isPlaying;
+        });
+
+        document.documentElement.requestFullscreen().catch(err => {
+            console.log("Не удалось открыть в полноэкранном режиме: ", err);
         });
     </script>
 </body>
